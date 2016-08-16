@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Polynome by polynome</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Polynome</h1>
-      <h2 class="project-tagline">Software Design and Implementation</h2>
-    </section>
+---
+layout: default
+---
 
-    <section class="main-content">
-      <p>Polynome is a consulting firm providing rapid, high-quality design and implementation for your software projects. Our expertise ranges from mobile and web applications to server software, queues, distributed systems, and databases. Our team has experience building applications for Microsoft and Amazon / AWS as well as for numerous successful startups.</p>
+<div class="home">
 
-<p>Contact us at <a href="mailto:partners@polynome.co">partners@polynome.co</a> to learn how we can help you deliver your next software project.</p>
+  <h1 class="page-heading">Posts</h1>
 
-    </section>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-  
-  </body>
-</html>
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>

@@ -1,0 +1,23 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Polynome
+email: partners@polynome.co
+description: > # this means to ignore newlines until "baseurl:"
+  Polynome is a consulting firm providing rapid, high-quality design
+  and implementation for your software projects. Our expertise ranges
+  from mobile and web applications to server software, queues,
+  distributed systems, and databases. Our team has experience building
+  applications for Microsoft and Amazon / AWS as well as for numerous
+  successful startups.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://polynome.co" # the base hostname & protocol for your site
+github_username: polynome
+
+# Build settings
+markdown: kramdown
