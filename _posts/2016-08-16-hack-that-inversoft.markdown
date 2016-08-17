@@ -172,89 +172,93 @@ the target servers. I just needed a password.
 How would I get it? I spent some time looking at the postfix server
 also running on the machine I had reached; could I intercept a
 password reset email from Linode? Nope, the postfix server wasn't in
-use; the team used Google Docs. Could I fashion a convincing phishing
-attack using my privileged position? I couldn't think of a clever way
-to do it, and I knew the Inversoft team would be on high alert given
-the challenge they had issued. I spent some time trying to elevate my
-privileges to root at the shell (for no good reason) but found that
-the team had religiously applied Ubuntu patches and non of the Linux
-elevation tricks I could find would work.
+use; the team used Google Apps for email. Could I fashion a convincing
+phishing attack using my privileged position? I couldn't think of a
+clever way to do it, and I knew the Inversoft team would be on high
+alert given the challenge they had issued. I spent some time trying to
+elevate my privileges to root at the shell (for no good reason) but
+found that the team had religiously applied Ubuntu's LTS patches and
+none of the Linux elevation tricks I could find would work on their
+kernel.
 
 I continued to browse around the filesystem, searching for any lead. I
-found the way forward in maybe the first place I should have looked;
+finally found the way forward in the first place I should have looked;
 the `inversoft` user's home directory. It turns out that not only was
-this user account used to run several services on the box, but it was
-also used by humans as a shared account for various projects. And one
-of those projects was provisioning the HackThis machines. There, in
-`~/.linodecli/config`? A Linode API key.
+this account used to run several services on the box, but it was also
+used by humans as a shared account for various projects and
+one-offs. And one of those projects was provisioning the HackThis
+machines. There, in `~inversoft/.linodecli/config`? A Linode API key.
 
 <p align="center">
 <img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/happy.gif">
 </p>
 
 A call to the "list hosts" API in Linode revealed the exact two hosts
-I had in my sights. Time to get a root console, right? Nope. You can
-do all sorts of things with the
-[Linode API](https://www.linode.com/api), but getting a console was
-not one of them; you need a username and password for the web console,
-and I still didn't have one of those. The next thought was to try and
-export the disk image from one of the Linode machines, but this also
-was not available from the API.
+I had in my sights, and confirmed that now I had the correct key. Time
+to get a root console, right? Nope. You can do all sorts of things
+with the [Linode API](https://www.linode.com/api), but getting a
+console is not one of them; you can only do that on the web with a
+regular username and password, and I still didn't have one of
+those. The next thought was to try and export the disk image from one
+of the Linode machines, but the API does not provide an "export"
+function.
 
 Smash and Grab
 --------------
 
 After lots of messing around with APIs, my colleague Anton had an
 idea; what if we spin up a new, "intruder" machine in the Linode
-account with a root password that we know and then connect the
+account with a root password that we know and then connect the target
 application server's disk to our intruder server instead? Looking
 through the API docs, this seemed like it would be a working plan, but
-it would also be obvious and destructive; the new machine would appear
-on the Linode dashboard, and as soon as we unmounted the volume, the
-machines we were targeting would start failing.
+it would also be obvious and destructive; our intruder machine would
+appear on the Linode dashboard, and as soon as we unmounted the
+volume, the machines we were targeting would start failing.
 
 To pull this off, we'd have to grab the MySQL credentials and
 exfiltrate the DB as quickly as possible, before the Inversoft
-operators could shut us down. Since we were so close to the prize, and
-since the machines weren't "real" production machines, rather
-honeypots designed to be hacked, we decided this was a reasonable and
-ethical course of action. At this point it was about 8pm local time at
-the Inversoft offices in Denver, so we hoped nobody would be at their
-desks, potentially buying us a few extra minutes.
+operators could detect us and shut us down. Since we were so close to
+the prize, and since the machines weren't "real" production machines,
+rather honeypots designed to be hacked, we decided this was a
+reasonable and ethical course of action. At this point it was about
+8pm local time at the Inversoft offices in Denver, so we hoped nobody
+would be at their desks, potentially buying us a few extra minutes.
 
 <p align="center">
 <img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/mission-impossible.gif">
 </p>
 
-With me at the shell of the new host, Anton attached the application
-server disk image to my machine, from which I quickly retrieved the
-Passport API keys and the MySQL credentials to the other host. Anton
-started enumerating all the data he could from Passport using our API
-key while I triggered a mysqldump - but I couldn't connect! We should
-have seen this coming; the MySQL server had a firewall rule that
-permitted access *only* from the application server; this was one of
-the hardening measures from the whitepaper.
+With me at the shell of the intruder host, Anton used the API to
+attach the application server disk image to my machine, from which I
+quickly retrieved the Passport API keys and the MySQL credentials to
+the other host. Anton started enumerating all the data he could from
+Passport using our API key while I triggered a `mysqldump` to geth the
+DB - but I couldn't connect! We should have seen this coming; the
+MySQL server had a firewall rule that permitted access *only* from the
+application server; this was one of the hardening measures from the
+whitepaper.
 
-For a normal intruder, this bit of defense-in-depth would have been a
+For most attackers, this bit of defense-in-depth would have been a
 dead-end, but thinking quickly and using our superpowers (Linode API
 keys), we performed a private IP swap between the application server
-and our intruder server. Reboot the intruder server to get the new IP
-and it's all over: mysqldump connects, the data is SCPed off to my
-machine, and we've beaten the challenge. Our haste was warranted; once
-we reported the attack to Inversoft, they let us know that they had
-received notification emails for every Linode action we had taken
-(create server, connect disk, swap IP, etc), and had already started
-investigating just as we were finished downloading the database dump.
+and our intruder server. Rebooted the intruder server to get the new
+IP and it was all over: `mysqldump` connected, the data was SCPed off
+to my machine, and we had beaten the challenge. Our haste was
+warranted; once we reported the attack to Inversoft, they let us know
+that they had received notification emails for every Linode action we
+had taken (create server, connect disk, swap IP, etc), and had already
+started investigating just as we had finished downloading the
+database dump.
 
 The Recap
 ---------
 
-After discovering an unpatched, unfirewalled Elasticsearch instance,
-we gained shell access on a utility server used for various functions
-at Inversoft. On there, we found API keys for Linode left behind by a
-human operator that allowed us to detach disks from running servers
-and attach them to servers we controlled, stealing sensitive user data
-(all to win a prize).
+After discovering an unpatched, unfirewalled Elasticsearch instance
+using `nmap`, we gained shell access on a utility server used for
+various functions at Inversoft. On there, we found API keys for Linode
+left behind by a human operator. Those keys allowed us to detach disks
+from running servers and attach them to servers we controlled,
+stealing sensitive user data (all to win a prize).
 
 What could Inversoft have done differently to prevent this? Their
 hardening guide was and remains correct; there was no way we were
@@ -268,20 +272,20 @@ attack was slightly different, it's a great reminder that attackers
 are far more likely to go around your defenses than through them.
 
 The other weakness was the "jack-of-all-trades" Elasticsearch server
-that we discovered and exploited; it's the utility box you have that
-runs various small services, maybe acts as a bastion host or testing
-ground, and nobody quite manages it or knows what it is used for. This
-server is as weak as its weakest link; and because it is not
-purpose-managed, it can be difficult to keep track of what is running
-on it and ensure all services are patched and secured. If you have one
-of these servers floting around somewhere, you might want to think
-twice about keeping it - it may very well be the weakest spot in your
+that we discovered and exploited; it's the utility box you may have
+that runs various random services, maybe acts as a bastion host or
+testing ground, and nobody quite manages it or knows what it is used
+for. This server is as weak as its weakest service; and because it is
+not purpose-managed, it can be difficult to keep track of what is
+running on it and ensure all services are patched and secured. If you
+have one of these servers floting around somewhere, you might want to
+think twice about keeping it - it may very well be the chink in your
 armor.
 
-Thanks to Inversoft for the effort that went in to putting together
-this challenge, and of course the prize MacBook (which they quickly
-delivered). Their
+Thanks to Inversoft for the effort they put in to writing their
+security guide and sponsoring the "HackThis" challenge, and of course
+the prize of a MacBook (which they quickly delivered). Their
 [security guide](https://www.inversoft.com/guides/2016-guide-to-user-data-security)
 remains an excellent resource, and we hope the practical lessons
-learned from this post will help your organization identify and secure
-your infrastructure.
+learned from this post will help your organization identify less
+obvious risks risks and secure your infrastructure.
