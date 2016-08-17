@@ -24,7 +24,7 @@ False Attempts
 --------------
 
 So I started poking around. It only took a few minutes to verify that
-the target servers were hardended just as described in the whitepaper;
+the target servers were hardened just as described in the whitepaper;
 SSH access via public keys only, no additional ports open other than
 HTTP/HTTPS. Fingerprinting the web-facing host via
 [nmap](https://nmap.org/) showed that it was running the latest Ubuntu
@@ -159,10 +159,10 @@ How would I get it? I spent some time looking at the postfix server
 also running on the machine I had reached; could I intercept a
 password reset email from Linode? Nope, the postfix server wasn't in
 use; the team used Google Docs. Could I fashion a convincing phishing
-attack using my priviledged position? I couldn't think of a clever way
+attack using my privileged position? I couldn't think of a clever way
 to do it, and I knew the Inversoft team would be on high alert given
 the challenge they had issued. I spent some time trying to elevate my
-priviledges to root at the shell (for no good reason) but found that
+privileges to root at the shell (for no good reason) but found that
 the team had religiously applied Ubuntu patches and non of the Linux
 elevation tricks I could find would work.
 
@@ -240,7 +240,7 @@ What could Inversoft have done differently to prevent this? Their
 hardening guide was and remains correct; there was no way we were
 getting through the front door of their servers (SSH or HTTPS). The
 course we took was a common one in targeted attacks; gain access to
-secrets used by humans, sometimes in ancially systems, and use that
+secrets used by humans, sometimes in ancillary systems, and use that
 access to bypass security via operator consoles or other magic. The
 most frequently seen version of this in the wild is to steal access to
 an email inbox that can be used to reset a password, and although this
