@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "HackThat: Breaking in to a hardened server via the back door"
+title:  "HackedThat: Breaking in to a hardened server via the back door"
 date:   2016-08-16 15:39:10 -0700
 categories: infosec inversoft elasticsearch linode penetration-testing
 ---
@@ -12,21 +12,27 @@ sophisticated
 guide spans from hardening servers from provisioning, up through the
 IP and SSH layers, and all the way to application-level techniques for
 password hashing, SQL injection protection, and intrusion
-detection. As proof that they stood behind the guide, the team
-provisioned a pair of [Linode](https://www.linode.com/) hosts, gave
-them the hardening treatment, and offered a fully-loaded MacBook to
-anyone who could break in, taunting all comers by naming the hardened
-web server [hackthis.inversoft.com](https://hackthis.inversoft.com).
+detection. As proof that they stood behind their advice, the Inversoft
+team provisioned a pair of [Linode](https://www.linode.com/) hosts, a
+web server and database server, and gave them the hardening
+treatment. Inversoft offered up a fully-loaded MacBook to anyone who
+could break in, taunting all comers by naming the hardened web server
+[hackthis.inversoft.com](https://hackthis.inversoft.com).
 
-// TODO meme
+
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/game-on.gif">
+</p>
+
+Game on.
 
 False Attempts
 --------------
 
-So I started poking around. It only took a few minutes to verify that
-the target servers were hardened just as described in the whitepaper;
-SSH access via public keys only, no additional ports open other than
-HTTP/HTTPS. Fingerprinting the web-facing host via
+So one morning I started poking around. It only took a few minutes to
+verify that the target servers were hardened just as described in the
+whitepaper; SSH access via public keys only, no additional ports open
+other than HTTP/HTTPS. Fingerprinting the web-facing host with
 [nmap](https://nmap.org/) showed that it was running the latest Ubuntu
 version, and revealed nothing about the HTTP server running (though I
 knew from the whitepaper that it was a recent version of
@@ -42,7 +48,9 @@ on this vector; even if I were able to get an XSS working, it would at
 best allow me to read data from other users; a real security issue to
 be sure, but insufficient to win the coveted MacBook.
 
-// TODO lebowski
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/darkness-washed-over-the-dude.gif">
+</p>
 
 The user database under protection was Inversoft's
 [Passport](https://www.inversoft.com/products/user-database-sso)
@@ -93,6 +101,10 @@ three favorite letters:
 
 R. C. E.
 
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/jackpot.gif">
+</p>
+
 Elasticsearch, it seems, allows API users to specify custom scoring
 functions that can be used to rank results. Those scoring functions
 can be written as Groovy code. Elasticsearch implements a sandbox that
@@ -137,10 +149,12 @@ found a username and password for a Linode account! I knew from the
 original whitepaper that the "HackThis" machines had been provisioned
 with Linode, so I signed in and prepared to claim my reward.
 
-It was a different Linode account. A real one, with real servers, but
+It was the wrong Linode account. A real one, with real servers, but
 not the servers that would win me my prize.
 
-// TODO I am disappoint
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/oh-my-god-i-was-wrong.gif">
+</p>
 
 A Plan Emerges
 --------------
@@ -174,11 +188,13 @@ also used by humans as a shared account for various projects. And one
 of those projects was provisioning the HackThis machines. There, in
 `~/.linodecli/config`? A Linode API key.
 
-// TODO eureka gif
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/happy.gif">
+</p>
 
-A quick call to the "list hosts" API in Linode revealed the exact two
-hosts I had in my sights. Time to get a root console, right? Nope. You
-can do all sorts of things with the
+A call to the "list hosts" API in Linode revealed the exact two hosts
+I had in my sights. Time to get a root console, right? Nope. You can
+do all sorts of things with the
 [Linode API](https://www.linode.com/api), but getting a console was
 not one of them; you need a username and password for the web console,
 and I still didn't have one of those. The next thought was to try and
@@ -205,6 +221,10 @@ honeypots designed to be hacked, we decided this was a reasonable and
 ethical course of action. At this point it was about 8pm local time at
 the Inversoft offices in Denver, so we hoped nobody would be at their
 desks, potentially buying us a few extra minutes.
+
+<p align="center">
+<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/mission-impossible.gif">
+</p>
 
 With me at the shell of the new host, Anton attached the application
 server disk image to my machine, from which I quickly retrieved the
@@ -254,8 +274,9 @@ ground, and nobody quite manages it or knows what it is used for. This
 server is as weak as its weakest link; and because it is not
 purpose-managed, it can be difficult to keep track of what is running
 on it and ensure all services are patched and secured. If you have one
-of these servers, you might want to think twice about keeping it
-around - it may very well be the weakest spot in your armor.
+of these servers floting around somewhere, you might want to think
+twice about keeping it - it may very well be the weakest spot in your
+armor.
 
 Thanks to Inversoft for the effort that went in to putting together
 this challenge, and of course the prize MacBook (which they quickly
