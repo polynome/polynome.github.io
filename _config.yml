@@ -13,8 +13,8 @@ description: > # this means to ignore newlines until "baseurl:"
   and implementation of software projects with a focus on scalability
   and security.. Our expertise ranges from mobile and web applications
   to distributed server systems. Our team has decades of experience 
-  building secure applications for Microsoft, Amazon / AWS as well as
-  for numerous successful startups.
+  building secure applications for Microsoft, Amazon and numerous
+  successful startups.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://polynome.co" # the base hostname & protocol for your site
 github_username: polynome
