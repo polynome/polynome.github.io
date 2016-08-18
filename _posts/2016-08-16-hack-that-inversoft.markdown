@@ -272,13 +272,13 @@ attack was slightly different, it's a great reminder that attackers
 are far more likely to go around your defenses than through them.
 
 The other weakness was the "jack-of-all-trades" Elasticsearch server
-that we discovered and exploited; it's the utility box you may have
-that runs various random services, maybe acts as a bastion host or
-testing ground, and nobody quite manages it or knows what it is used
+that we discovered and exploited. It's an example of a utility box 
+that runs various random services - maybe acts as a bastion host or
+testing ground - and nobody quite manages it or knows what it is used
 for. This server is as weak as its weakest service; and because it is
 not purpose-managed, it can be difficult to keep track of what is
 running on it and ensure all services are patched and secured. If you
-have one of these servers floting around somewhere, you might want to
+have one of these servers floating around somewhere, you might want to
 think twice about keeping it - it may very well be the chink in your
 armor.
 
