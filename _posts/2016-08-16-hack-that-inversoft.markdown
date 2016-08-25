@@ -289,3 +289,5 @@ the prize of a MacBook (which they quickly delivered). Their
 remains an excellent resource, and we hope the practical lessons
 learned from this post will help your organization identify less
 obvious risks risks and secure your infrastructure.
+
+*Bradley Buda is a Managing Partner at Polynome.*
