@@ -290,4 +290,4 @@ remains an excellent resource, and we hope the practical lessons
 learned from this post will help your organization identify less
 obvious risks risks and secure your infrastructure.
 
-*Bradley Buda is a Managing Partner at Polynome.*
+*Bradley Buda is a Managing Partner at Polynome and previously the co-founder and CTO at [Meldium](https://www.meldium.com).*
