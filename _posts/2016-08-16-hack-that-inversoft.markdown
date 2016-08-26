@@ -23,7 +23,7 @@ could break in, taunting all comers by naming the hardened web server
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/game-on.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/game-on.gif">
 </p>
 
 <br />
