@@ -20,13 +20,11 @@ could break in, taunting all comers by naming the hardened web server
 [hackthis.inversoft.com](https://hackthis.inversoft.com).
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/game-on.gif">
 </p>
 
-<br />
 <br />
 
 Game on.
@@ -54,13 +52,11 @@ best allow me to read data from other users; a real security issue to
 be sure, but insufficient to win the coveted MacBook.
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/darkness-washed-over-the-dude.gif">
 </p>
 
-<br />
 <br />
 
 The user database under protection was Inversoft's
@@ -113,13 +109,11 @@ three favorite letters:
 R. C. E.
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/jackpot.gif">
 </p>
 
-<br />
 <br />
 
 Elasticsearch, it seems, allows API users to specify custom scoring
@@ -170,13 +164,11 @@ It was the wrong Linode account. A real one, with real servers, but
 not the servers that would win me my prize.
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/oh-my-god-i-was-wrong.gif">
 </p>
 
-<br />
 <br />
 
 A Plan Emerges
@@ -213,13 +205,11 @@ one-offs. And one of those projects was provisioning the HackThis
 machines. There, in `~inversoft/.linodecli/config`? A Linode API key.
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/happy.gif">
 </p>
 
-<br />
 <br />
 
 A call to the "list hosts" API in Linode revealed the exact two hosts
@@ -254,13 +244,11 @@ reasonable and ethical course of action. At this point it was about
 would be at their desks, potentially buying us a few extra minutes.
 
 <br />
-<br />
 
 <p align="center">
 <img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/mission-impossible.gif">
 </p>
 
-<br />
 <br />
 
 With me at the shell of the intruder host, Anton used the API to
