@@ -57,7 +57,7 @@ be sure, but insufficient to win the coveted MacBook.
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/darkness-washed-over-the-dude.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/darkness-washed-over-the-dude.gif">
 </p>
 
 <br />
@@ -116,7 +116,7 @@ R. C. E.
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/jackpot.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/jackpot.gif">
 </p>
 
 <br />
@@ -173,7 +173,7 @@ not the servers that would win me my prize.
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/oh-my-god-i-was-wrong.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/oh-my-god-i-was-wrong.gif">
 </p>
 
 <br />
@@ -216,7 +216,7 @@ machines. There, in `~inversoft/.linodecli/config`? A Linode API key.
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/happy.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/happy.gif">
 </p>
 
 <br />
@@ -257,7 +257,7 @@ would be at their desks, potentially buying us a few extra minutes.
 <br />
 
 <p align="center">
-<img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/mission-impossible.gif">
+<img width="75%" class="freezeframe freezeframe-responsive" src="{{ site.baseurl }}/assets/hack-that-inversoft/mission-impossible.gif">
 </p>
 
 <br />
