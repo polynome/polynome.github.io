@@ -19,10 +19,15 @@ treatment. Inversoft offered up a fully-loaded MacBook to anyone who
 could break in, taunting all comers by naming the hardened web server
 [hackthis.inversoft.com](https://hackthis.inversoft.com).
 
+<br />
+<br />
 
 <p align="center">
 <img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/game-on.gif">
 </p>
+
+<br />
+<br />
 
 Game on.
 
@@ -48,9 +53,13 @@ on this vector; even if I were able to get an XSS working, it would at
 best allow me to read data from other users; a real security issue to
 be sure, but insufficient to win the coveted MacBook.
 
+<br />
+
 <p align="center">
 <img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/darkness-washed-over-the-dude.gif">
 </p>
+
+<br />
 
 The user database under protection was Inversoft's
 [Passport](https://www.inversoft.com/products/user-database-sso)
@@ -101,9 +110,13 @@ three favorite letters:
 
 R. C. E.
 
+<br />
+
 <p align="center">
 <img width="75%" src="{{ site.baseurl }}/assets/hack-that-inversoft/jackpot.gif">
 </p>
+
+<br />
 
 Elasticsearch, it seems, allows API users to specify custom scoring
 functions that can be used to rank results. Those scoring functions
